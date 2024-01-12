@@ -149,3 +149,93 @@ body {
   height: 400px;
   width: 80vh;
 }
+
+/* filter */
+
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  transition: margin-left 0.5s;
+}
+
+.filter {
+  text-align: center;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  opacity: 0.7;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.filter p {
+  font-size: 0.8rem;
+}
+
+#filters a {
+  text-decoration: none;
+  color: black;
+}
+
+.no-style-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.tax-info {
+  display: none;
+}
+
+.tax-toggle {
+  border: 1px solid black;
+  border-radius: 1rem;
+  height: 3.25rem;
+  padding: 1rem;
+  margin-left: 3rem;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .tax-toggle {
+    position: relative;
+    bottom: 2px; /* Adjust the value as needed */
+    right: 20px; /* Adjust the value as needed */
+    left: 20px;
+    margin-left: 0;
+  }
+}
+
+.navbar-toggler-icon i {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  /* Adjust the layout for smaller screens */
+
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter {
+    text-align: center;
+    margin: 1rem; /* Adjust margin as needed */
+    opacity: 1; /* Ensure filters are fully visible */
+  }
+
+  .listings-nav {
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
