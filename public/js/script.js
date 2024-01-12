@@ -26,27 +26,6 @@
     navbar.classList.toggle("hambergerMenu");
   });
 
-  let filtersToggle = document.getElementById("filters");
-  filtersToggle.addEventListener("click", () => {
-    if (filtersToggle.classList.contains(collapsed)) {
-      filtersToggle.style.marginLeft = "-200px";
-    } else {
-      filtersToggle.style.marginLeft = "0";
-    }
-  });
-
-  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-  taxSwitch.addEventListener("click", () => {
-    let taxInfo = document.getElementsByClassName("tax-info");
-    for (info of taxInfo) {
-      if (info.style.display != "inline") {
-        info.style.display = "inline";
-      } else {
-        info.style.display = "none";
-      }
-    }
-  });
-
   // navbar
 
   function sendData(e) {
