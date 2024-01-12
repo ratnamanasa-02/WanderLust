@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/listings">Explore</a>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <form class="position-relative d-flex" role="search">
+            <input class="form-control me-2 search-input" type="text" id="searchResults" placeholder="Search destinations">
+            <a class="btn search-btn" href="#" name="search" id="searchBtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</a>
+            <div class="dropdown-menu position-absolute" id="searchDropdown" aria-labelledby="searchInput"></div>
+        </form>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+          <% if(!currUser){ %>
+            <a class="nav-link" href="/signup"><b>Sign up</b></a>
+            <a class="nav-link" href="/login"><b>Log in</b></a>
+          <% } %>
+          <% if(currUser){ %>
+            <a class="nav-link" href="/logout"><b>Log out</b></a>
+          <% } %>
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <script>
+    function sendData(e) {
+        const searchResults = document.getElementById("searchResults");
+        const searchDropdown = document.getElementById('searchDropdown');
+        const searchValue = e.value;
+
+        fetch("/listings/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ searching: searchValue })
+        })
+        .then(res => res.json())
+        .then(data => {
+            searchDropdown.innerHTML = '';
+            if (data.length > 0) {
+                data.forEach(suggestion => {
+                    const option = document.createElement('button');
+                    option.classList.add('dropdown-item');
+                    option.type = 'button';
+                    option.textContent = suggestion.location; // Replace 'location' with your actual property name
+                    searchDropdown.appendChild(option);
+
+                    option.addEventListener('click', function () {
+                        searchResults.value = suggestion.location;
+                        searchDropdown.innerHTML = '';
+                    });
+                });
+                searchDropdown.style.display = 'block';
+            } else {
+                searchDropdown.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Event listener on keyup
+    const searchInput = document.getElementById('searchResults');
+      searchInput.addEventListener('keyup', function () {
+          sendData(this);
+      });
+
+      // Hide dropdown when clicking outside the input or dropdown menu
+      document.addEventListener('click', function (event) {
+          if (!event.target.matches('#searchResults')) {
+              searchDropdown.style.display = 'none';
+          }
+      });
+
+
+      //Search button 
+      
+        const searchBtn = document.getElementById('searchBtn');
+
+        searchBtn.addEventListener('click', function () {
+            const searchValue = encodeURIComponent(document.getElementById('searchResults').value);
+            window.location.href = `/listings/search/${searchValue}`;
+        });
+
+  </script>
