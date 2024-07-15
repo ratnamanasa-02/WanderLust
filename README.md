@@ -12,9 +12,6 @@ https://wanderlust-blgn.onrender.com/listings
 - Features
 - Installation
 - Usage
-- Contributing
-- License
-- Contact
 
 ## Introduction
 WanderLust is a MERN stack-based travel blog website aimed at helping people contribute to open source, upskill in Node.js, and master Git.
